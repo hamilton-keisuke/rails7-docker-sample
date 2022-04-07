@@ -61,4 +61,16 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # js: trueのときだけchromeを使うようにする
+  # https://qiita.com/jnchito/items/c7e6e7abf83598a6516d#js-true%E3%81%AE%E3%81%A8%E3%81%8D%E3%81%A0%E3%81%91chrome%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      if example.metadata[:js]
+        driven_by :selenium_chrome_headless_no_sandbox
+      else
+        driven_by :rack_test
+      end
+    end
+  end
 end
