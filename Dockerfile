@@ -5,9 +5,9 @@ RUN apt update && \
     vim \
     sudo \
     wget
-# chrome (for system spec)
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apt-get install -y ./google-chrome-stable_current_amd64.deb
+# # chrome (for system spec)
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+#     && apt-get install -y ./google-chrome-stable_current_amd64.deb
 # node
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \
     apt install -y nodejs
