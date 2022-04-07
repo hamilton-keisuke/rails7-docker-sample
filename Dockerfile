@@ -16,19 +16,17 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee
 RUN mkdir /app
 WORKDIR /app
 
-# COPY Gemfile /app/Gemfile
-# COPY Gemfile.lock /app/Gemfile.lock
-# RUN bundle install
-# COPY . /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN bundle install
+COPY . /app
 
-# RUN yarn install --check-files
-# RUN bundle exec rails assets:precompile
+RUN yarn install --check-files
 
 # # Add a script to be executed every time the container starts.
 # COPY docker-entrypoint.sh /usr/bin/
-# RUN chmod +x /usr/bin/docker-entrypoint.sh
-# ENTRYPOINT ["docker-entrypoint.sh"]
-# EXPOSE 3000
+ENTRYPOINT ["./docker-entrypoint.sh"]
+EXPOSE 3000
 
 # # Start the main process.
-# CMD ["rails", "s", "-b", "0.0.0.0"]
+CMD ["rails", "s", "-b", "0.0.0.0"]
