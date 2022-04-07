@@ -1,0 +1,58 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #secrets-manager:
+     # key: secret-id:json-key:version-stage:version-id
+     # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+     # - variable
+     # - variable
+  #git-credential-helper: yes
+#batch:
+  #fast-fail: true
+  #build-list:
+  #build-matrix:
+  #build-graph:
+phases:
+  #install:
+    #Ubuntu 標準イメージ 2.0 以降を使用する場合、ランタイムバージョンを指定する必要があります。
+    #ランタイムバージョンを指定して、Ubuntu 標準イメージ 2.0 以外のイメージを使用すると、ビルドは失敗します。
+    #runtime-versions:
+      # name: version
+      # name: version
+    #commands:
+      # - command
+      # - command
+  pre_build:
+    commands:
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - apt-get install -y ./google-chrome-stable_current_amd64.deb
+  build:
+    commands:
+      - cd /app && bundle exec rspec --format progress --format RspecJunitFormatter --out rspec-result.xml
+  #pos_build:
+    #commands:
+      # - command
+      # - command
+reports:
+  rspec_reports:
+    files:
+      - rspec-result.xml
+    base-directory: /app
+    file-format: JunitXml
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths

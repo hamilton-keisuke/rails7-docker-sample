@@ -2,6 +2,7 @@
 
 set -eu
 
-rails db:migrate
+rm -rf tmp/pids/server.pid
+rails db:prepare
 
 exec "$@"
